@@ -1,62 +1,106 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>Page Not Found</title>
+  <title>Страница не найдена — Шнырёв Андрей Павлович</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    * {
-      line-height: 1.2;
-      margin: 0;
+    :root {
+      --bg: #1e2a32;
+      --text: #f4f6f7;
+      --muted: #cbd5d6;
+      --ink: #0b0f14;
+      --primary: #3a606e;
+      --primary-dark: #2e4c57;
+      --secondary: #d4b483;
+      --card-a: rgba(30, 42, 50, 0.95);
+      --card-b: rgba(15, 25, 32, 0.9);
+      --radius: 12px;
+      --shadow-1: 0 10px 30px rgba(0,0,0,.5);
+      --shadow-2: 0 15px 35px rgba(0,0,0,.4);
     }
 
-    html {
-      color: #888;
-      display: table;
-      font-family: sans-serif;
-      height: 100%;
-      text-align: center;
-      width: 100%;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .error-container {
+      background: var(--card-a);
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-1);
+      max-width: 480px;
+      width: 100%;
+      animation: fadeIn 0.5s ease;
     }
 
     h1 {
-      color: #555;
-      font-size: 2em;
-      font-weight: 400;
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 15px;
+      color: var(--text);
     }
 
     p {
-      margin: 0 auto;
-      width: 280px;
+      color: var(--muted);
+      margin-bottom: 25px;
+      line-height: 1.4;
     }
 
-    @media only screen and (max-width: 280px) {
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
 
-      body,
-      p {
-        width: 95%;
-      }
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
 
-      h1 {
-        font-size: 1.5em;
-        margin: 0 0 0.3em;
-      }
-
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 
 <body>
-  <h1>Page Not Found</h1>
-  <p>Sorry, but the page you were trying to view does not exist.</p>
+<div class="error-container">
+  <h1>404</h1>
+  <h2>Страница не найдена</h2>
+  <p>Возможно, вы ошиблись в адресе или страница была удалена.<br>
+    Попробуйте начать с главной или запишитесь на приём.</p>
+  <a href="/" class="btn">На главную</a>
+  <br><br>
+  <a href="/#contact" class="btn">Записаться</a>
+</div>
 </body>
-
 </html>
-<!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->
