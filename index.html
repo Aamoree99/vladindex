@@ -442,7 +442,7 @@
     </section>
   </div>
 
-  <!-- Нижняя полоса -->
+  <!-- ===== Footer (кнопка открывает модалку) ===== -->
   <div class="footer-bottom">
     <div class="footer-bottom__inner">
       <p class="copy">© 2025&nbsp;Шнырёв Андрей Павлович. Все права защищены.</p>
@@ -451,13 +451,44 @@
         <a class="f-social__icon" href="https://wa.me/+79036605517" aria-label="WhatsApp" rel="noopener"><i class="fab fa-whatsapp"></i></a>
       </div>
       <div class="f-legal">
-        <a href="/privacy">Конфиденциальность</a>
-        <span aria-hidden="true">·</span>
-        <a href="/terms">Пользовательское соглашение</a>
+        <a href="#" id="openPrivacy" class="f-legal__link">Конфиденциальность</a>
       </div>
-      <a href="#top" class="to-top" aria-label="Наверх"><i class="fas fa-arrow-up"></i></a>
+      <a href="#main" class="to-top" aria-label="Наверх"><i class="fas fa-arrow-up"></i></a>
     </div>
   </div>
+
+  <!-- ===== Privacy Modal ===== -->
+  <div id="privacyModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <div class="modal__backdrop" data-close></div>
+
+    <div class="modal__dialog" role="document">
+      <header class="modal__header">
+        <h2 id="privacyTitle" class="modal__title">Политика конфиденциальности</h2>
+        <button class="modal__close" id="closePrivacy" aria-label="Закрыть">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </header>
+
+      <div class="modal__body">
+        <!-- ВСТАВЬ сюда свой текст политики -->
+        <p>Мы уважаем вашу конфиденциальность. Здесь кратко опиши сбор и обработку персональных данных, куки, правовые основания, контакты для запросов и т.д.</p>
+        <h3>1. Какие данные собираем</h3>
+        <p>Имя, контактные данные, сообщения, cookie для аналитики.</p>
+        <h3>2. Зачем</h3>
+        <p>Для ответа на обращения, улучшения сервиса, безопасности.</p>
+        <h3>3. Хранение и передача</h3>
+        <p>Данные хранятся на защищённых серверах, не передаются третьим лицам без основания.</p>
+        <h3>4. Ваши права</h3>
+        <p>Доступ, исправление, удаление, отзыв согласия. Связь: <a href="mailto:example@domain.com">example@domain.com</a>.</p>
+      </div>
+
+      <footer class="modal__footer">
+        <button class="btn btn--ghost" id="privacyPrint" type="button">Печать / PDF</button>
+        <button class="btn btn--primary" id="privacyOk" type="button">Понятно</button>
+      </footer>
+    </div>
+  </div>
+
 </footer>
 
 </body>

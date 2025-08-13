@@ -214,3 +214,57 @@
   startAuto();
 
 })();
+
+// ===== Modal logic (Esc, клик по фону, запрет скролла, фокус) =====
+(function () {
+  const body = document.body;
+  const modal = document.getElementById('privacyModal');
+  const openBtn = document.getElementById('openPrivacy');
+  const closeBtn = document.getElementById('closePrivacy');
+  const okBtn = document.getElementById('privacyOk');
+  const printBtn = document.getElementById('privacyPrint');
+  const backdrop = modal.querySelector('.modal__backdrop');
+
+  let lastFocused = null;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    body.style.overflow = 'hidden';
+    // фокус на кнопку закрытия
+    closeBtn?.focus();
+    // примитивный фокус-трэп
+    document.addEventListener('focus', trapFocus, true);
+    document.addEventListener('keydown', onKeyDown);
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    body.style.overflow = '';
+    document.removeEventListener('focus', trapFocus, true);
+    document.removeEventListener('keydown', onKeyDown);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
+  function trapFocus(e) {
+    if (!modal.classList.contains('open')) return;
+    if (!modal.contains(e.target)) {
+      e.stopPropagation();
+      closeBtn?.focus();
+    }
+  }
+
+  openBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  okBtn?.addEventListener('click', closeModal);
+  backdrop?.addEventListener('click', closeModal);
+
+  printBtn?.addEventListener('click', () => window.print());
+})();
