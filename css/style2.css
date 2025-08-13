@@ -1,0 +1,306 @@
+/* =====================================================================
+   Variables
+   ===================================================================== */
+:root {
+  --bg: #1e2a32;            /* основной фон — глубокий серо-синий */
+  --text: #f4f6f7;          /* основной текст — почти белый */
+  --muted: #cbd5d6;         /* приглушенный текст */
+  --ink: #0b0f14;           /* цвет для текста на светлых фонах */
+
+  --primary: #3a606e;       /* основной акцент — мягкий синевато-зеленый */
+  --primary-dark: #2e4c57;  /* тёмный вариант для ховеров */
+  --secondary: #d4b483;     /* тёплый акцент (заголовки, кнопки) */
+
+  --card-a: rgba(30, 42, 50, 0.95);
+  --card-b: rgba(15, 25, 32, 0.9);
+
+  --radius: 12px;
+  --shadow-1: 0 10px 30px rgba(0,0,0,.5);
+  --shadow-2: 0 15px 35px rgba(0,0,0,.4);
+}
+
+/* =====================================================================
+   Base
+   ===================================================================== */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+
+  /* мягкий плавный градиент в цветах сайта */
+  background-image: linear-gradient(
+    180deg,
+    var(--bg) 0%,
+    var(--primary-dark) 100%
+  );
+  background-attachment: fixed; /* лёгкий эффект глубины */
+
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+.container{ max-width:1200px; margin:7rem auto 0; padding:0 1.25rem; }
+
+section{ scroll-margin-top:80px; padding:4rem 0; } /* поддержка для семантич. <section> */
+.section{ padding:4rem 0; scroll-margin-top:6rem; }
+.section--alt{ background:#111827; border-radius:var(--radius); padding:4rem 1.25rem; }
+
+.h1{ font-size:2.5rem; font-weight:800; margin:0 0 .5rem; }
+.h2{ font-size:2rem; font-weight:800; text-align:center; margin:0 0 3rem; text-shadow:0 3px 6px rgba(0,0,0,.4); }
+.h3{ font-size:1.5rem; font-weight:700; margin:0 0 1rem; }
+.lead{ font-size:1.25rem; font-weight:600; }
+.center{ text-align:center; }
+.accent{ color:var(--amber); }
+
+/* =====================================================================
+   Header / Navigation (классический навбар)
+   ===================================================================== */
+.site-header{
+  position:fixed; top:0; left:0; right:0; height:64px; z-index:10;
+  background:linear-gradient(90deg,#111827,#1f2937); box-shadow:var(--shadow-1);
+  border-radius:0 0 10px 10px;
+}
+.nav{ max-width:1200px; margin:0 auto; height:100%; padding:0 1rem; display:flex; align-items:center; justify-content:space-between; }
+.logo{
+  font-family:'Cinzel',serif; font-size:1.8rem; font-weight:700; letter-spacing:2px;
+  background:linear-gradient(90deg, var(--teal), var(--amber));
+  -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 4px 10px rgba(0,0,0,.6);
+  text-decoration:none; transition:transform .2s ease;
+}
+.logo:hover{ transform:scale(1.03); }
+.nav__list{ display:flex; gap:1.25rem; list-style:none; margin:0; padding:0; }
+.nav__link{ color:var(--text); text-decoration:none; transition:color .3s ease, transform .3s ease; }
+.nav__link:hover{ color:var(--amber); transform:scale(1.05); text-shadow:0 1px 2px rgba(0,0,0,.5); }
+
+/* поддержка твоих глобальных ссылок nav a */
+nav a{ transition: color .3s ease, transform .3s ease; }
+nav a:hover{ color:var(--amber); transform:scale(1.1); text-shadow:0 1px 2px rgba(0,0,0,.5); }
+
+/* Mobile nav */
+.nav__toggle{ display:none; background:none; border:0; width:40px; height:40px; position:relative; }
+.nav__burger, .nav__burger::before, .nav__burger::after{
+  content:""; position:absolute; left:8px; right:8px; height:2px; background:var(--text); transition:.25s;
+}
+.nav__burger{ top:19px; }
+.nav__burger::before{ top:-8px; }
+.nav__burger::after{ top:8px; }
+
+@media (max-width: 900px){
+  .nav__toggle{ display:block; }
+  .nav__list{
+    position:absolute; top:64px; left:0; right:0; background:#111827; display:none; flex-direction:column; padding:1rem; border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav__list.is-open{ display:flex; }
+}
+
+/* =====================================================================
+   Hero
+   ===================================================================== */
+.hero{
+  position:relative; text-align:center; border-radius:16px; overflow:hidden;
+  background-image:url('https://via.placeholder.com/1920x600?text=%D0%9F%D1%80%D0%BE%D1%84%D0%B5%D1%81%D1%81%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F+%D0%BF%D1%81%D0%B8%D1%85%D0%BE%D1%82%D0%B5%D1%80%D0%B0%D0%BF%D0%B8%D1%8F');
+  background-size:cover; background-position:center;
+}
+.hero::before{
+  content:''; position:absolute; inset:0; background:rgba(0,0,0,.4); z-index:1;
+}
+.hero > *{ position:relative; z-index:2; }
+
+.hero__bg{ position:absolute; inset:0; } /* если используешь картинку как <img> */
+.hero__bg img{ width:100%; height:100%; object-fit:cover; filter:contrast(1.05) saturate(1.1) brightness(.85); }
+.hero::after{ /* мягкая подложка, если нужно усилить затемнение */
+  /* content:''; position:absolute; inset:0; background:rgba(0,0,0,.15); */
+}
+
+/* =====================================================================
+   Blocks / Cards / Text containers
+   ===================================================================== */
+.divider{ width:8rem; height:4px; background:linear-gradient(90deg, var(--teal), var(--amber)); margin:2rem auto; border-radius:9999px; }
+
+h2, h3{ text-shadow:0 3px 6px rgba(0,0,0,.4); }
+
+.text-container{
+  background:linear-gradient(135deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(42,64,63,.3);
+  border-radius:var(--radius);
+  padding:2.5rem;
+  max-width:70rem;
+  margin:0 auto 2rem;
+  backdrop-filter:blur(5px);
+  box-shadow:var(--shadow-1);
+}
+.text-container p, .text-container ul{
+  text-shadow:0 2px 4px rgba(0,0,0,.6);
+  color:var(--muted);
+}
+
+/* Твои классы карточек */
+.service-card, .faq-item, .testimonial-item > div{
+  background:linear-gradient(135deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(42,64,63,.3);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  backdrop-filter:blur(5px);
+  box-shadow:var(--shadow-1);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.service-card:hover, .text-container:hover, .faq-item:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-2);
+}
+
+/* Параллельно оставляю универсальные .card */
+.cards{ display:grid; gap:2rem; grid-template-columns:repeat(1,1fr); }
+@media (min-width: 768px){ .cards{ grid-template-columns:repeat(3,1fr); } }
+.card{
+  background:linear-gradient(135deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(42,64,63,.3);
+  border-radius:var(--radius);
+  padding:1.5rem;
+  box-shadow:var(--shadow-1);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-2); }
+
+.icon{ font-size:2rem; color:var(--teal); margin-bottom:.75rem; }
+.list{ margin:0; padding-left:1.25rem; }
+.list--cols{ columns:2; column-gap:1.5rem; }
+.list--tight li{ margin-bottom:.35rem; }
+.mb-4{ margin-bottom:1rem; }
+
+/* =====================================================================
+   Buttons
+   ===================================================================== */
+.btn{
+  display:inline-block;
+  background:linear-gradient(45deg, var(--teal), var(--teal-2));
+  color:#fff;
+  padding:.75rem 2rem;
+  border-radius:25px;
+  font-weight:700;
+  text-decoration:none;
+  transition: background-color .6s ease, transform .6s ease, box-shadow .6s ease;
+  box-shadow:0 5px 15px rgba(42,64,63,.5);
+  pointer-events:auto;
+}
+.btn:hover{ transform:scale(1.1); box-shadow:0 8px 20px rgba(42,64,63,.7); }
+.btn:active{ transform:scale(.95); }
+.btn--primary{ background:linear-gradient(45deg, var(--teal), var(--teal-2)); }
+
+/* =====================================================================
+   FAQ
+   ===================================================================== */
+.faq{ max-width:48rem; margin:0 auto; }
+.faq__item{ background:linear-gradient(135deg, var(--card-a), var(--card-b)); border:1px solid rgba(42,64,63,.3); border-radius:var(--radius); box-shadow:var(--shadow-1); margin-bottom:1rem; padding:1rem 1.25rem; }
+.faq__q{ cursor:pointer; }
+.faq__a{ color:var(--muted); }
+
+/* =====================================================================
+   Forms
+   ===================================================================== */
+input, textarea{ font:inherit; }
+input:focus, textarea:focus{
+  outline:2px solid var(--teal); outline-offset:1px; /* заменил невалидный ring */
+}
+iframe{ border-radius:10px; box-shadow:var(--shadow-1); }
+
+/* =====================================================================
+   Testimonials (твои классы) + Carousel (универсальные)
+   ===================================================================== */
+.testimonials-carousel{
+  display:flex; overflow:hidden; width:100%; position:relative;
+  padding:0 60px; height:300px;
+  padding-left:1rem; padding-right:1rem;
+}
+.testimonials-wrapper{ display:flex; transition:transform .7s ease; }
+.testimonial-item{
+  min-width:50%; box-sizing:border-box; height:100%; position:relative; overflow:visible;
+}
+.testimonial-item > div{
+  height:100%;
+  background:linear-gradient(135deg, rgba(42,64,63,.2), rgba(212,163,115,.15));
+  border:2px solid rgba(42,64,63,.5);
+  padding:2rem;
+  box-shadow:0 15px 35px rgba(0,0,0,.4), inset 0 0 15px rgba(42,64,63,.3);
+  backdrop-filter:blur(10px);
+  position:relative; z-index:1;
+}
+.testimonial-item > div::before{
+  content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+  background:inherit; z-index:-1; filter:blur(20px); transform:rotate(45deg);
+}
+
+.carousel{ position:relative; padding:0 3rem; }
+.carousel__viewport{ overflow:hidden; width:100%; }
+.carousel__track{ display:flex; transition:transform .6s ease; }
+.testimonial{ min-width:50%; padding:1.5rem; position:relative; }
+.testimonial > *{
+  background:linear-gradient(135deg, rgba(42,64,63,.2), rgba(212,163,115,.15));
+  border:2px solid rgba(42,64,63,.5); border-radius:var(--radius);
+}
+.testimonial p{ margin:0; padding:1.25rem 1.5rem; }
+.testimonial__author{ font-weight:700; margin-top:.5rem; padding:0 1.5rem 1.25rem; }
+
+.carousel-arrow,
+.carousel__arrow{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:linear-gradient(45deg, var(--teal), var(--teal-2));
+  color:#fff; border:none; cursor:pointer; padding:1.2rem; z-index:10; border-radius:50%;
+  width:50px; height:50px; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 5px 15px rgba(42,64,63,.5); transition:transform .3s ease, box-shadow .3s ease;
+}
+.carousel-arrow:hover,
+.carousel__arrow:hover{ transform:translateY(-50%) scale(1.1); box-shadow:0 8px 20px rgba(42,64,63,.7); }
+.left-arrow, .carousel__arrow--left{ left:10px; }
+.right-arrow, .carousel__arrow--right{ right:10px; }
+
+@media (max-width: 768px){
+  .testimonial-item{ min-width:100%; }
+  .testimonials-carousel{ padding:0 30px; height:350px; }
+  .testimonial{ min-width:100%; }
+  .carousel{ padding:0 2.25rem; }
+}
+
+/* =====================================================================
+   Footer
+   ===================================================================== */
+.site-footer{
+  text-align:center; color:#fff; padding:2rem 1rem; margin-top:2rem;
+  background:linear-gradient(90deg,#111827,#1f2937); border-radius:10px 10px 0 0;
+}
+.social{ margin-top:.75rem; display:flex; gap:.75rem; justify-content:center; }
+.social__icon{ color:#fff; font-size:1.6rem; }
+.social__icon:hover{ color:var(--amber); }
+
+/* =====================================================================
+   Logo text helper (твой класс)
+   ===================================================================== */
+.logo-text{
+  font-family:'Cinzel', serif;
+  font-size:2.5rem; font-weight:700;
+  background:linear-gradient(90deg, var(--teal) 0%, var(--amber) 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow:0 4px 10px rgba(0,0,0,.6); letter-spacing:2px; transition:transform .3s ease;
+}
+.logo-text:hover{ transform:scale(1.05); }
+@media (max-width: 768px){ .logo-text{ font-size:2rem; } }
+
+/* =====================================================================
+   Utilities
+   ===================================================================== */
+.divider{ width:8rem; height:4px; margin:2rem auto; border-radius:9999px; background:linear-gradient(90deg, var(--teal), var(--amber)); }
+.fade-in{ opacity:0; transform:translateY(20px); transition:opacity .8s ease-out, transform .8s cubic-bezier(.17,.67,.83,.67); }
+.fade-in.visible{ opacity:1; transform:translateY(0); }
+
+.skip-link{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+.skip-link:focus{
+  left:1rem; top:1rem; width:auto; height:auto; background:#111827; color:#fff;
+  padding:.5rem .75rem; border-radius:6px; box-shadow:var(--shadow-1);
+}
+ц
